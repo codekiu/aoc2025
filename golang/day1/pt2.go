@@ -15,15 +15,9 @@ func main() {
 	for _, val := range data {
 		direction := string(val[0])
 		rotations, _ := strconv.Atoi(val[1:])
-		fmt.Println("Now processing", direction, rotations)
 		timesZero, newDial := recursiveFunc(dial, direction, rotations, 0, 99)
 		total += timesZero
 		dial = newDial
-		fmt.Println("Current Dial === ", dial)
-		fmt.Println("Current total ===", total)
-		// if idx == 1 {
-		// 	break
-		// }
 	}
 
 	fmt.Println("Password is ", total)
@@ -44,7 +38,6 @@ func check(e error) {
 }
 
 func recursiveFunc(currentDial int, direction string, rotations int, min int, max int) (int, int) {
-	fmt.Println("RecursiveFunc: ", currentDial, direction, rotations, min, max)
 	counter := 0
 	newDial := 0
 
@@ -63,10 +56,6 @@ func recursiveFunc(currentDial int, direction string, rotations int, min int, ma
 		counter += newCounter + 1
 		newDial = dial
 	}
-	// else if newDial == 0 { required for pt1
-	//
-	// 	counter =+ 1
-	// }
 
 	return counter, newDial
 }
