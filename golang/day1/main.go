@@ -63,6 +63,10 @@ func recursiveFunc(currentDial int, direction string, rotations int, min int, ma
 		counter += newCounter + 1
 		newDial = dial
 	}
+	// else if newDial == 0 { required for pt1
+	//
+	// 	counter =+ 1
+	// }
 
 	return counter, newDial
 }
