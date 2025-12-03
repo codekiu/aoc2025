@@ -56,14 +56,12 @@ func recursiveFunc(currentDial int, direction string, rotations int, min int, ma
 
 	if newDial > max {
 		newCounter, dial := recursiveFunc(newDial, "L", 100, min, max)
-		counter += newCounter
+		counter += newCounter + 1
 		newDial = dial
 	} else if newDial < min {
 		newCounter, dial := recursiveFunc(newDial, "R", 100, min, max)
-		counter += newCounter
+		counter += newCounter + 1
 		newDial = dial
-	} else if newDial == 0 {
-		counter += 1
 	}
 
 	return counter, newDial
