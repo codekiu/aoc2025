@@ -13,39 +13,22 @@ func main() {
 	fmt.Println("Go!")
 	for _, val := range values {
 		ranges := strings.Split(val, "-")
-		fmt.Println("Ranges: ", ranges)
 		min, _ := strconv.Atoi(ranges[0])
 		max, _ := strconv.Atoi(ranges[1])
 		for i := min; i <= max; i++ {
-			fmt.Println("Processing: ", i)
 			lenOfNumber := len(strconv.Itoa(i))
 			if lenOfNumber%2 != 0 {
 				continue
 			}
 
 			numberOfItemsToSelect := lenOfNumber / 2
-			numberSplitted := chunkString(strconv.Itoa(i), numberOfItemsToSelect)
-			seen := false
-			numbers := map[string]struct{}{}
+			found := wasFound(strconv.Itoa(i), numberOfItemsToSelect)
 
-			fmt.Println("NumbersSplitted:", numberSplitted, " splitting by every ", numberOfItemsToSelect)
-
-			for _, x := range numberSplitted {
-				found := contains(numbers, x)
-
-				if found {
-					seen = true
-				}
-
-				numbers[x] = struct{}{}
-			}
-
-			if seen {
+			if found {
 				total += i
 			}
 
 		}
-		break
 	}
 
 	fmt.Println("total = ", total)
@@ -72,17 +55,25 @@ func check(err error) {
 	}
 }
 
-func chunkString(s string, size int) []string {
-	fmt.Println("Chunking - ", s)
-	var chunks []string
+func wasFound(s string, size int) bool {
+	numbers := map[string]struct{}{}
+	seen := false
+
 	for i := 0; i < len(s); i += size {
 		end := i + size
 		if end > len(s) {
 			end = len(s)
 		}
-		chunks = append(chunks, s[i:end])
+
+		if i == 0 {
+			numbers[s[i:end]] = struct{}{}
+		} else {
+			if contains(numbers, s[i:end]) {
+				seen = true
+			}
+		}
 	}
-	return chunks
+	return seen
 }
 
 func contains(s map[string]struct{}, char string) bool {
