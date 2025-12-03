@@ -45,6 +45,7 @@ func main() {
 			}
 
 		}
+		break
 	}
 
 	fmt.Println("total = ", total)
