@@ -1,0 +1,32 @@
+package main
+
+import (
+	"fmt"
+	"os"
+	"strings"
+)
+
+func main() {
+
+	load_file("test_input")
+}
+
+func load_file(name string) []string {
+	file, err := os.ReadFile(name)
+	check(err)
+
+	dat := strings.Split(string(file), ",")
+	var values []string
+
+	for i := range dat {
+		fmt.Println(i)
+	}
+
+	return values
+}
+
+func check(err error) {
+	if err != nil {
+		panic(err)
+	}
+}
